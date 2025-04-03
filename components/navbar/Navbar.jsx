@@ -4,9 +4,11 @@ import logo from "./images/logo.png";
 export const NavBar = () => {
     return (
         <div className="bg-green-950 h-15 text-white flex items-center justify-between p-7">
-            <div className="">
+            <div className="flex items-center">
                     <Image alt="logo" src={logo} width={40} height={40}  className=""/>
-
+                    <p className="p-2">
+                        convert currency Junior
+                    </p>
             </div>
             <div className="flex items-center">
                 <p className="p-2">
