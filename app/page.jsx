@@ -13,20 +13,14 @@ export default function Home() {
   const [fromCurrency, setFromCurrency] = useState("");
   const [money, setMoney] = useState("");
   const [result, setResult] = useState("");
-  const [user , setUser] = useState(null);
   const [Currencies, setCurrencies] = useState([]);
-  const [counterConverted , setCounterConverted] = useState(0);
+
   useEffect(() => {
-    currency
-      .getAllContries()
-      .then((response) => {
-        const currencies = response.countries.map(
-          (countrie) => countrie.currency
-        );
-        const uniqueValue = [...new Set(currencies)];
-        setCurrencies(uniqueValue);
-      })
-      .catch((e) => console.log("Error fetching currencies:", e));
+      currency.allCurrenciesList()
+        .then(r => {
+          setCurrencies(r.currencies)
+        })
+        .catch(e => console.log(e));
   }, []);
 
   function handleClick() {
@@ -34,14 +28,7 @@ export default function Home() {
     currency
       .convertCurrency(toCurrency, fromCurrency, money)
       .then((r) => {
-        setCounterConverted(counterConverted + 1);
         setResult(r.value.toFixed(2));
-        const user = currency.profile()
-          .then(user => setUser(user))
-          .catch(e => console.log(e));
-        if(counterConverted >= 5 && user === null) {
-          alert('please create account');
-        };
       })
       .catch((e) => console.log(e));
   }

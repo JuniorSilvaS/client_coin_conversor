@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = 'http://localhost:4000';
+const url = 'https://src-currency-conversor.onrender.com';
 
 const getAllContries = async () => {
     try {
@@ -100,6 +100,18 @@ async function editProfile(email, password, avatar, name) {
     }
 }
 
+async function allCurrenciesList () {
+    try {
+        const response = await axios.get(
+            `${url}/api/countries/getAllCurrencies`
+        );
+        
+        return response.data;
+
+    }catch(e) {
+        console.log(e);
+    };
+};
 
 export const currency = {
     getAllContries,
@@ -108,5 +120,6 @@ export const currency = {
     getProfileUser,
     register,
     profile,
-    editProfile
+    editProfile,
+    allCurrenciesList
 };
